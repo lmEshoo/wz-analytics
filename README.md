@@ -1,6 +1,6 @@
 # Warzone Analytics 
 
-Call of Duty Warzone is a popular video game. There are multiple sites that collect cruical information to analyze a player's gameplay. Here we collect importatnt stats from multiple sites and save them to a CSV. Then use Google colab to visualize the data collected.
+Call of Duty Warzone is a popular video game. There are multiple sites that collect cruical information to analyze a player's gameplay. Here we collect important stats from multiple sites and save them to a CSV. Then use Google colab to visualize the data collected.
 
 
 ![alt text](images/demo.png)
