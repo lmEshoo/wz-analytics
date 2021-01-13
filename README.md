@@ -2,9 +2,6 @@
 
 Call of Duty Warzone is a popular video game. There are multiple sites that collect cruical information to analyze a player's gameplay. Here we collect important stats from multiple sites and save them to a CSV. Then use Google colab to visualize the data collected.
 
-
-![alt text](images/demo.png)
-
 ## Collect
 
 ### Requirements
@@ -26,3 +23,17 @@ docker pull lmestar/wz:0.2
 ```
 make USER=<Enter your PSN username>
 ```
+
+## Visualize
+
+### Scatter
+
+![alt text](images/demo4.png)
+
+### Bubbles
+
+![alt text](images/demo2.png)
+
+### Parallel Categories
+
+![alt text](images/demo3.png)
