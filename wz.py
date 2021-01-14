@@ -23,15 +23,17 @@ class CodTracker():
         cod_tracker_damage_list          = []
         cod_tracker_match_link_list      = []
         
-        for i in range(3, 26):
+        for i in range(1, 31):
             
             try:
-                link = '//*[@id="app"]/div[2]/div[2]/div/main/div[2]/div[3]/div[2]/div/div[2]/div['+str(i)+']/span/button'
-                login_btn = self.driver.find_element_by_xpath(link)
+                button = "//button[contains(., 'Load More Matches')]"
+                login_btn = self.driver.find_element_by_xpath(button)
                 login_btn.click()
                 print('click ' + str(i))
-                sleep (1.5)
+                sleep (2)
             except:
+                print("couldn't find ", i)
+                sleep (1)
                 pass
         
         for day in range(1,12):
