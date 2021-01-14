@@ -21,7 +21,7 @@ docker pull lmestar/wz:0.2
 
 ### Run 
 ```
-make USER=<Enter your PSN username>
+make USER=<Enter your PSN username> DAYS=<# of past days to collect>
 ```
 
 ## Visualize

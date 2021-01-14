@@ -1,6 +1,7 @@
 USERNAME=lmestar
 CONTAINER_NAME=wz
 IMAGE=$(USERNAME)/$(CONTAINER_NAME):0.2
+DAYS?=8
 
 all: run
 
@@ -17,6 +18,7 @@ up:
 	-p 5901:5901 \
 	-v /dev/shm:/dev/shm \
 	-e USER=${USER} \
+	-e DAYS=${DAYS} \
 	-e TZ=America/Los_Angeles \
 	--name $(CONTAINER_NAME) $(IMAGE) \
 	bash -c "sleep 2 && python3 wz.py "

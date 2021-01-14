@@ -36,7 +36,7 @@ class CodTracker():
                 sleep (1)
                 pass
         
-        for day in range(1,12):
+        for day in range(1,int(os.getenv('DAYS'))+1):
             print(day)
             cod_tracker_date                = self.driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/main/div[2]/div[3]/div[2]/div/div[2]/div['+str(day)+']/div[1]/h3').text.split('\n')[0]
             cod_tracker_games_per_day       = self.driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/main/div[2]/div[3]/div[2]/div/div[2]/div['+str(day)+']/div[1]/h3').text.split('\n')[1]
@@ -62,7 +62,7 @@ class CodTracker():
                 cod_tracker_match_link_list.append(cod_tracker_match_link)
         
         self.driver.quit()
-        
+
         return cod_tracker_games_per_day_list, cod_tracker_date_list, cod_tracker_mode_list, cod_tracker_match_placement_list, cod_tracker_time_list, cod_tracker_kills_list, cod_tracker_damage_list, cod_tracker_match_link_list
 
 class SbmmWz():
