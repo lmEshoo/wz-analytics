@@ -28,4 +28,9 @@ stop:
 
 run: up
 	@while [[ ! `curl -sf http://localhost:6901/?password=vncpassword` ]]; do sleep 5; done
-	open http://localhost:6901/?password=vncpassword
+	ifeq ($(OS), Windows_NT)
+		start http://localhost:6901/?password=vncpassword
+	else
+		open http://localhost:6901/?password=vncpassword
+	endif
+	
