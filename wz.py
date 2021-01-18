@@ -114,4 +114,4 @@ df = pd.DataFrame(list(zip(cod_tracker_games_per_day_list, cod_tracker_date_list
 
 print(df)
 
-df.to_csv('/app/'+os.getenv('USER')+'-summary.csv', index=False)
+df.to_csv('/app/summary.csv', index=False)
