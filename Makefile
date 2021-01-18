@@ -16,7 +16,7 @@ up:
 	-v $(PWD):/app \
 	-p 6901:6901 \
 	-p 5901:5901 \
-	-v /dev/shm:/dev/shm \
+	--shm-size 2g \
 	-e USER=${USER} \
 	-e DAYS=${DAYS} \
 	-e TZ=America/Los_Angeles \
