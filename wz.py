@@ -81,6 +81,10 @@ class SbmmWz():
             
             sleep(1.5)
             
+            sbmm_team_placement_list = []
+            sbmm_players_kd_list = []
+            sbmm_player_name_list = []
+
             try:
                 sbmm_match_difficulty = self.driver.find_element_by_xpath('/html/body/app-root/app-lobby/div/div/div/div/div/div[1]/div[1]/div/div[2]').text
             except:
@@ -93,6 +97,38 @@ class SbmmWz():
                 sbmm_avg_kd           = '0'
                 sbmm_median_kd        = '0'
             
+            # Get individual player's KD + placement in the lobby
+            # max 50 teams
+            for team in range(1,50):
+                try:
+                    team_placement           = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+team+']/app-lobby-team/div/div[1]/div[1]').text
+                except:
+                    break
+
+                for player in range(2,5):
+                    try:
+                        player_kd                = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+team+']/app-lobby-team/div/div[2]/div[2]/div['+player+']/div[1]/div[1]').text
+                        player_name              = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+team+']/app-lobby-team/div/div[2]/div[2]/div['+player+']/div/div').text
+                        
+                        sbmm_team_placement_list.append(team_placement)
+                        sbmm_players_kd_list.append(player_kd)
+                        sbmm_player_name_list.append(player_name)
+                    except:
+                        pass
+
+                
+
+                df = pd.DataFrame(list(zip(sbmm_team_placement_list, sbmm_player_name_list, sbmm_players_kd_list)), 
+                columns =['sbmm_team_placement_list', 'sbmm_player_name_list', 'sbmm_players_kd_list'])
+
+                print(df)
+
+                df.to_csv('/app/'+lobby+'.csv', index=False)
+                
+
+            
+
+
             sbmm_match_difficulty_list.append(sbmm_match_difficulty)
             sbmm_avg_kd_list.append(sbmm_avg_kd)
             sbmm_median_kd_list.append(sbmm_median_kd)
