@@ -86,34 +86,37 @@ class SbmmWz():
             sbmm_player_name_list = []
 
             try:
-                sbmm_match_difficulty = self.driver.find_element_by_xpath('/html/body/app-root/app-lobby/div/div/div/div/div/div[1]/div[1]/div/div[2]').text
+                sbmm_match_difficulty = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[2]/div[1]/div/div[2]').text
             except:
                 sbmm_match_difficulty = 'NOT RANKED'
             
             try:
-                sbmm_avg_kd           = self.driver.find_element_by_xpath('/html/body/app-root/app-lobby/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div[2]').text
-                sbmm_median_kd        = self.driver.find_element_by_xpath('/html/body/app-root/app-lobby/div/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div[2]').text
+                sbmm_avg_kd           = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[2]/div[2]/div[2]/div[2]/div/div[2]').text
+                sbmm_median_kd        = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[2]/div[2]/div[2]/div[1]/div/div[2]').text
             except:
                 sbmm_avg_kd           = '0'
                 sbmm_median_kd        = '0'
             
             # Get individual player's KD + placement in the lobby
             # max 50 teams
-            for team in range(1,50):
+            for team in range(1,51):
                 try:
-                    team_placement           = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+team+']/app-lobby-team/div/div[1]/div[1]').text
+                    team_placement           = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+str(team)+']/app-lobby-team/div/div[1]/div[1]').text
                 except:
+                    print("no team placement found")
                     break
 
-                for player in range(2,5):
+                for player in range(2,6):
                     try:
-                        player_kd                = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+team+']/app-lobby-team/div/div[2]/div[2]/div['+player+']/div[1]/div[1]').text
-                        player_name              = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+team+']/app-lobby-team/div/div[2]/div[2]/div['+player+']/div/div').text
+                        player_kd                = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+str(team)+']/app-lobby-team/div/div[2]/div[2]/div['+str(player)+']/div[2]/div[1]').text
+                        player_name              = self.driver.find_element_by_xpath('/html/body/app-root/div/div/app-lobby/div/div/div/div[4]/div['+str(team)+']/app-lobby-team/div/div[2]/div[1]/div['+str(player)+']/div/div').text
                         
+                        # print(team_placement,player_name, player_kd)
                         sbmm_team_placement_list.append(team_placement)
                         sbmm_players_kd_list.append(player_kd)
                         sbmm_player_name_list.append(player_name)
                     except:
+                        print("no player found")
                         pass
 
                 
@@ -125,10 +128,6 @@ class SbmmWz():
 
                 df.to_csv('/app/'+lobby+'.csv', index=False)
                 
-
-            
-
-
             sbmm_match_difficulty_list.append(sbmm_match_difficulty)
             sbmm_avg_kd_list.append(sbmm_avg_kd)
             sbmm_median_kd_list.append(sbmm_median_kd)
